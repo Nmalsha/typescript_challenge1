@@ -2,7 +2,8 @@
 //Déclaire une interface User
 interface User {
   name: string;
-  age: number;
+  age?: number;
+  birthday?: string;
 }
 
 // Déclairer des type pour la paramétre et retour de la function
@@ -12,18 +13,22 @@ type prettyPrintWilderReturn = void;
 
 const wilders: User[] = [];
 const user1: User = { name: "Pierre", age: 23 };
-const user2: User = { name: "Paul", age: 33 };
+const user2: User = { name: "Paul", birthday: "10/02/1990" };
 const user3: User = { name: "Jacques", age: 25 };
 
 wilders.push(user1);
 wilders.push(user2);
 wilders.push(user3);
 
-const prettyPrintWilder = (
+const prettyPrintWilder = function (
   users: prettyPrintWilderParams
-): prettyPrintWilderReturn => {
+): prettyPrintWilderReturn {
   users.map((user) => {
-    console.log(`${user.name} is ${user.age} years old`);
+    const ageOrBirthday =
+      user.age !== undefined
+        ? `is ${user.age} years old`
+        : `was born on ${user.birthday}`;
+    console.log(`${user.name} ${ageOrBirthday}`);
   });
 };
 
